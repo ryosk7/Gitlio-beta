@@ -21,6 +21,10 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+  username: gitlio_beta
+  password: <%= ENV["PG_PASSWORD"] %>
+  host: localhost
+
 development:
   <<: *default
   database: gitlio_beta_development
