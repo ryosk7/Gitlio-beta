@@ -10,14 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421094053) do
+ActiveRecord::Schema.define(version: 20180422011958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "followed_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_followed_users_on_user_id"
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "follower_uid"
+    t.index ["user_id"], name: "index_followers_on_user_id"
+  end
+
   create_table "starred_repos", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "full_name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_starred_repos_on_user_id"
@@ -33,5 +50,7 @@ ActiveRecord::Schema.define(version: 20180421094053) do
     t.string "avatar_url"
   end
 
+  add_foreign_key "followed_users", "users"
+  add_foreign_key "followers", "users"
   add_foreign_key "starred_repos", "users"
 end
