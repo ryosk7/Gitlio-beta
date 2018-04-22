@@ -1,2 +1,12 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<img class="img" src="<%= @user.avatar_url %>">
+<nav class="inner-profile-nav">
+  <ul>
+    <li>Stars <%= @user.starred_repos.count %></li>
+  </ul>
+  <ul>
+    <li>Followers <%= @user.followers.count %></li>
+  </ul>
+  <ul>
+    <li>Following <%= @user.followed_users.count %></li>
+  </ul>
+</nav>
