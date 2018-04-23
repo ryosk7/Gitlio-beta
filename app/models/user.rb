@@ -4,12 +4,13 @@ class User < ApplicationRecord
   has_many :followers
   has_many :followed_users
 
-  def self.from_omniauth(response_data)
-    where(uid: response_data[:uid]).first_or_create do |user|
-      user.uid = response_data[:uid]
-      user.name = response_data[:extra][:raw_info][:name]
-      user.login = response_data[:extra][:raw_info][:login]
-      user.token = response_data[:credentials][:token]
+  def self.from_omniauth(auth)
+    create! do |user|
+      user.provider = auth[:provider]
+      user.uid = auth[:uid]
+      user.name = auth[:extra][:raw_info][:name]
+      user.login = auth[:extra][:raw_info][:login]
+      user.token = auth[:credentials][:token]
     end
   end
 

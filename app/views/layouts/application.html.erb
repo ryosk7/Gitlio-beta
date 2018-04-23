@@ -15,7 +15,7 @@
           <%= "Signed in as #{current_user.login}" %>
           <%= link_to "Logout", github_logout_path, method: :delete %>
         <% else %>
-          <%= link_to "Login", github_login_path %>
+          <!-- <%= link_to "Login", '/auth/github' %> -->
         <% end %>
       </li>
       <% if current_user %>
